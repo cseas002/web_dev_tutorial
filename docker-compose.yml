@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - my_network
+    volumes:
+      - ./database/db_data:/var/lib/postgresql/data
+
+networks:
+  my_network:
