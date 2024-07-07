@@ -37,3 +37,16 @@ sudo chown $USER:docker /var/run/docker.sock
 sudo chmod 660 /var/run/docker.sock
 
 sudo apt -y install docker-compose
+
+# To find the api of the docker container:
+# docker ps (to find the containers)
+# docker inspect <container id or name>
+
+# For the api (express) (inside the api folder)
+# npm install express
+# npm install pg
+
+# For nodemon (automatic restart after save)
+# npm install --save-dev nodemon
+# To create package.json for the api:
+# npt init -y

@@ -14,5 +14,37 @@ services:
     volumes:
       - ./database/db_data:/var/lib/postgresql/data
 
+  api:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/app
+    depends_on:
+      - database
+    networks:
+      - my_network
+
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./client:/app
+    networks:
+      - my_network
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    depends_on:
+      - api
+      - client
+    networks:
+      - my_network
+
 networks:
   my_network:

@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Items() {
+
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/items', {
+            method: 'GET',
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseData) => {
+                setItems(responseData);
+            })
+    });
     return (
         <table>
             <tr>
@@ -8,14 +22,12 @@ function Items() {
                 <th>Category</th>
             </tr>
             <tbody>
-                <tr>
-                    <td>Souvlaki</td>
-                    <td>Food</td>
-                </tr>
-                <tr>
-                    <td>Sofa</td>
-                    <td>Furniture</td>
-                </tr>
+                {items.map((item, index) => (
+                    <tr key={index}>
+                        <td>{item.name}</td>
+                        <td>{item.category}</td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     );
